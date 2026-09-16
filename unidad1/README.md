@@ -1,3 +1,35 @@
+# Entrega Unidad 1 – Sebastián Losinno (Dni 43184738)
+
+Caso de uso: asistente de clasificación y respuesta de reclamos para una billetera virtual.
+Para cada reclamo devuelve categoría, prioridad, resumen y un borrador de respuesta que revisa un operador humano.
+
+Modelo: de pesos abiertos, servido vía API de Groq.
+- Modelo objetivo para despliegue propio: Llama 3.1 8B Instruct.
+- Modelo usado en este prototipo: `openai/gpt-oss-20b` (también de pesos abiertos), ya que Groq discontinuó
+  Llama 3.1 8B en su capa gratuita durante 2026 y lo recomienda como reemplazo.
+- Temperatura: 0.2, para obtener clasificaciones más consistentes.
+
+Estrategia de adaptación: prompt engineering avanzado combinando:
+- Few-shot: 4 reclamos ficticios ya resueltos, con la salida JSON esperada.
+- Chain-of-thought: el modelo razona paso a paso (problema principal → señales de urgencia →
+  categoría y prioridad) antes de clasificar.
+
+El prompt se arma en `src/prompt_templates.py` (función `construir_prompt_few_shot_cot`).
+
+Cambios respecto de la plantilla:
+- `src/prompt_templates.py`: contexto del asistente, categorías, ejemplos propios y función few-shot + CoT.
+- `src/main.py`: usa `construir_prompt_few_shot_cot` y 4 reclamos de prueba propios.
+- `src/providers/groq_provider.py`: temperatura ajustada a 0.2.
+
+Cómo ejecutar:
+1. Crear el Codespace con la configuración `unidad1-seminario-cd2`.
+2. `cp .env.example .env` y completar `MODEL_PROVIDER=groq` y `GROQ_API_KEY`.
+3. `python -m src.main`
+4. Los prompts y las respuestas quedan guardados en `evidencias.md`.
+
+---
+
+
 # Unidad 1 — Foundation Models: prompt engineering + PEFT
 
 Plantilla base para el componente práctico (consignas 6 a 10) del Trabajo Práctico

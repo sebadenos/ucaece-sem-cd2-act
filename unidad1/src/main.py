@@ -14,7 +14,7 @@ import os
 
 from dotenv import load_dotenv
 
-from src.prompt_templates import construir_prompt_few_shot
+from src.prompt_templates import construir_prompt_few_shot_cot
 from src.providers.factory import get_provider
 
 # --- Constantes del script (nada de "magic strings/numbers" inline) ---
@@ -23,13 +23,14 @@ EVIDENCIAS_FILE_PATH = "evidencias.md"
 
 # Técnica de prompting a usar. Cambiar por construir_prompt_chain_of_thought
 # si tu justificación de la consigna 3 fue chain-of-thought.
-CONSTRUIR_PROMPT = construir_prompt_few_shot
+CONSTRUIR_PROMPT = construir_prompt_few_shot_cot
 
 # Reemplazar por al menos 3 consultas relacionadas con tu propio caso de uso (consigna 1).
 CONSULTAS_DE_EJEMPLO = [
-    "¿Cómo cancelo una suscripción activa?",
-    "¿Qué medios de pago aceptan?",
-    "¿Puedo cambiar mi plan en cualquier momento?",
+    "No puedo entrar a mi cuenta desde ayer, me dice que está bloqueada y hoy tengo que pagar el alquiler.",
+    "Pagué con QR en un comercio y me descontaron $12.500, pero el comercio dice que no le llegó el pago.",
+    "Veo una compra de $85.000 en una tienda online que yo no hice, mi tarjeta [DATO] la tengo conmigo.",
+    "¿Cómo hago para cambiar el mail asociado a mi cuenta?",
 ]
 
 

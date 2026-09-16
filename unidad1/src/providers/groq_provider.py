@@ -13,7 +13,7 @@ GROQ_API_KEY_ENV_VAR = "GROQ_API_KEY"
 # `curl -s -H "Authorization: Bearer $GROQ_API_KEY" https://api.groq.com/openai/v1/models`
 # para ver los modelos vigentes en tu cuenta y actualizar esta constante.
 GROQ_MODEL_NAME = "openai/gpt-oss-20b"
-GROQ_TEMPERATURE = 0.7
+GROQ_TEMPERATURE = 0.2
 
 
 class GroqProvider(BaseProvider):
