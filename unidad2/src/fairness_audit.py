@@ -23,7 +23,12 @@ from sklearn.metrics import accuracy_score
 #
 # from fairlearn.metrics import equalized_odds_ratio
 # METRICAS_EXTRA = {"equalized_odds_ratio": equalized_odds_ratio}
-METRICAS_EXTRA: dict = {}
+from fairlearn.metrics import demographic_parity_ratio, equalized_odds_ratio
+
+METRICAS_EXTRA = {
+    "demographic_parity_ratio": demographic_parity_ratio,
+    "equalized_odds_ratio": equalized_odds_ratio,
+}
 
 
 @dataclass
